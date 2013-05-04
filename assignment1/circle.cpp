@@ -2,7 +2,8 @@
 //May-3-2013
 //UW online C++ course qtr 2
 //circle.cpp
-#include "circle.h"		
+#include "circle.h"	
+
 Circle::Circle(int radius, int xCoord,int yCoord, const char *name)
 	:mRadius(radius),
 	mXCoord(xCoord),
@@ -16,13 +17,29 @@ Circle::~Circle()
 	
 }
 
-Circle& Circle::operator + (Circle& c2)
+int Circle::getRadius()
 {
-	Circle tmp_circle(mRadius + c2.mRadius, mXCoord, mYCoord, mName);
-	return tmp_circle;
+	return mRadius;
 }
 
-void Circle::operator << (std::ostream& os)
+const Circle Circle::operator + (Circle& c2)
 {
+	return Circle(mRadius + c2.mRadius,mXCoord,mYCoord,mName);
+}
 
+std::ostream& operator<<(std::ostream& os, const Circle& circ)
+{
+	os << "Circle: " << circ.mName << " is located at: " << circ.mXCoord << "," << circ.mYCoord << " with a radius of " << circ.mRadius << std::endl;
+}
+
+const Circle* Circle::operator++()
+{
+	mRadius++;
+	return this;
+}
+
+const Circle Circle::operator++(int)
+{
+	mRadius++;
+	return Circle(mRadius, mXCoord, mYCoord, mName);
 }

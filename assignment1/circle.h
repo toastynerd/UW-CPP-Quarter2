@@ -13,8 +13,13 @@ public:
 		const char * name = NULL );
 	~Circle();
 
-	Circle& operator +(Circle&);
-	void operator << (std::ostream&);
+	int getRadius();
+
+	const Circle operator+(Circle&);
+	friend std::ostream& operator<<(std::ostream&, const Circle&);
+	const Circle* operator++();
+	const Circle operator++(int);
+
 	private:
 	int mXCoord;
 	int mYCoord;
